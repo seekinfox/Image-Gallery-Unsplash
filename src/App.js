@@ -11,10 +11,10 @@ import { createTheme, ThemeProvider } from '@mui/material'
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#4a148c',
+      main: '#000',
     },
     secondary: {
-      main: '#311b92',
+      main: '#fff',
     },
   },
 
@@ -25,8 +25,9 @@ function App() {
   const [rawData, setRawData] = useState(null)
   const [loadingData, setLoadingData] = useState(true)
   const [error, setError] = useState(null)
+  const [shuffle, setShuffle] = useState(true)
   
-  async function loadDataAPI (count = 1) {
+  async function loadDataAPI (count = 20) {
     const accessKey = 'fUccPr_-dHJ0hIkUciO_v7VI77hylduIqGM6mpqxGMU'
     let apiRoot = "https://api.unsplash.com";
     let dataURL = `${apiRoot}/photos/random?client_id=${accessKey}&count=${count}`
@@ -37,17 +38,17 @@ function App() {
       setLoadingData(false)
     } catch (err) {
       setError(err)
-      console.log(err); // TypeError: failed to fetch
+      //console.log(err); // TypeError: failed to fetch
     }        
   }
-  console.log("loadingData", loadingData)
-  console.log("rawData", rawData)
-  console.log('error', error)
+  // console.log("loadingData", loadingData)
+  // console.log("rawData", rawData)
+  // console.log('error', error)
 
   useEffect(() => {
     loadDataAPI()
 
-  }, [])
+  }, [shuffle])
   
 
   return (
@@ -56,7 +57,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Navbar nav={nav} setNav={setNav} />}>
             <Route index element={<Opening/>}/>
-            <Route path="gallery" element={<Gallery />}/>
+            <Route path="gallery" element={<Gallery setShuffle={setShuffle} rawData={rawData} />}/>
             <Route path="search" element={<Search />} />
           </Route>
         </Routes>

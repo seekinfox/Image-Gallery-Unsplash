@@ -1,18 +1,78 @@
-import { Container } from '@mui/material'
-import React from 'react'
+import { useTheme } from '@emotion/react'
+import { Container, ImageList, ImageListItem, Typography } from '@mui/material'
+import { Box } from '@mui/system'
+import { makeStyles } from '@mui/styles'
+import React, { useEffect, useState } from 'react'
+import { useMediaQuery } from '@mui/material'
+import {MdSignalWifiConnectedNoInternet4} from 'react-icons/md'
+import NavToolbar from '../Features/NavToolbar'
+import ImageGrid from '../Features/ImageGrid'
+import { motion } from 'framer-motion'
 
-export default function Gallery() {
-  return (
-    <Container 
-    maxWidth="xl"
-    sx={{
-      justifyContent:'center',
-      display:'flex',
-      height:"100vh", 
-      alignItems: 'center'
-      }}
+const useStyle = makeStyles(theme => ({
+
+   imageGridBox: {
+      [theme.breakpoints.up('xs')]: {
+         padding: '1rem 0 4rem', 
+      },
+
+      [theme.breakpoints.up('sm')]: {
+         padding: '1rem 1rem 2rem 5rem', 
+      }
+   },
+
+   emptyCard: {
+      border:'1px solid red',
+      padding: '1rem'
+   }
+}))
+
+export default function Gallery({setShuffle, rawData}) {
+   const theme = useTheme()
+   const style = useStyle(theme)
+   console.log('raw', rawData)
+   const [pageTransition, setPageTransition] = useState(true)
+
+
+   useEffect(() => {
+      const pageTransitionTimeout = setTimeout(() => {
+       setPageTransition(false)
+      }, 500);
+    
+      return () => {
+        clearTimeout(pageTransitionTimeout)
+      }
+    }, [])
+
+   return (
+   <motion.div
+   initial={{y:'30vh'}}
+   animate={pageTransition? {y:0}:{y:0}}>
+    <Box 
+    className={style.imageGridBox}
     >
-       Gallery
-    </Container>
+      <NavToolbar page='gallery' setShuffle={setShuffle}/>
+
+      {rawData !== null ? 
+         <ImageGrid rawData={rawData} />
+      :
+         <Container
+         sx={{
+            width:'100%',
+            minHeight:'90vh',
+            display:'flex',
+            flexDirection:'column',
+            justifyContent:'center',
+            alignItems:'center',
+            fontSize:'3rem',
+            opacity:'.7'
+         }}
+         >
+            <MdSignalWifiConnectedNoInternet4/>
+            <Typography sx={{fontSize:'1.5rem', lineHeight:'2', letterSpacing:'.2rem'}} variant='span' component='span'>B(0_0)T is Looking for more photos, sit back and take a coffie</Typography>
+         </Container>
+      }
+    </Box>
+   </motion.div>
   )
 }

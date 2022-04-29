@@ -50,6 +50,10 @@ body {
   padding: 0;
   font-family: 'Bellefair', serif;
   font-weight: 400;
+
+  > div {
+    overflow: hidden;
+  }
 }
 
 /**

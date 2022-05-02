@@ -29,9 +29,12 @@ export default function NavToolbar({page,setShuffle}) {
 
   return (
    <AppBar 
-   position='fixed'
    component='div'
-   sx={{zIndex:900, boxShadow:0, background:'linear-gradient(90deg, rgba(255,255,255,0) 30%, rgba(0,0,0,1) 10%)'}}>
+   sx={{
+      zIndex:900, 
+      boxShadow:0, 
+      background:'linear-gradient(90deg, rgba(255,255,255,0) 30%, rgba(0,0,0,1) 10%)'
+   }}>
          <Toolbar variant="regular">
             <Stack 
             width='100%'
@@ -45,7 +48,8 @@ export default function NavToolbar({page,setShuffle}) {
                   {page === 'gallery' &&
                      <Button 
                      onClick={() => setShuffle(prev => !prev)}
-                     sx={{borderRadius:0, letterSpacing:'.1rem'}} variant='contained' 
+                     sx={{
+                        borderRadius:0, letterSpacing:'.1rem'}} variant='contained' 
                      color='secondary'
                      >shuffle
                      </Button>

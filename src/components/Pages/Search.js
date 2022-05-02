@@ -13,10 +13,6 @@ import camera from '../../Assets/camera.gif'
 import { motion } from 'framer-motion'
 
 
-const unsplash = createApi({
-   accessKey: "fUccPr_-dHJ0hIkUciO_v7VI77hylduIqGM6mpqxGMU",
- });
-
 const useStyle = makeStyles(theme => ({
    imageGridBox: {
       [theme.breakpoints.up('xs')]: {
@@ -65,7 +61,7 @@ const useStyle = makeStyles(theme => ({
    }
 }))
 
-export default function Search() {
+export default function Search({unsplash}) {
    const theme = useTheme()
    const style = useStyle(theme)
    const [searchValue,setSearchValue] = useState('')
@@ -94,7 +90,7 @@ export default function Search() {
 
    const handleSubmit =(e)=> {
       e.preventDefault()
-      console.log(searchValue)
+      // console.log(searchValue)
       searchValue !== '' ? SearchAPI(searchValue) : setInputError(true)
       setDataLoading(true)
       setCurrentPage(1)
@@ -111,7 +107,7 @@ export default function Search() {
             perPage: 20,
          })
          setSearchData(data.response.results)
-         console.log('search', data.response)
+         // console.log('search', data.response)
          setDataLoading(false)
          setPageCount(data.response.total_pages)
          setSearchInfo({
@@ -123,14 +119,17 @@ export default function Search() {
          setSError(error)
       }
    }
+
    function handlePageChange(e, value){
       setCurrentPage(value)
       setDataLoading(true)
    }
+   
    useEffect(() => {
      SearchAPI(searchValue)
       setDataLoading(false)
    }, [currentPage])
+
    
   return (
    <motion.div
@@ -195,7 +194,7 @@ export default function Search() {
             <img width='100%' src={camera} alt='' />
          </Box>
            :
-         <ImageGrid rawData={searchData} />)
+         <ImageGrid unsplash={unsplash} rawData={searchData} />)
 
          :
          // can be made reusable

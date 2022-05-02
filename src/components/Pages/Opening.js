@@ -41,11 +41,12 @@ export default function Opening() {
    
 
 return (
-   <motion.div
+   <motion.section
    initial={{y:'30vh'}}
    animate={pageTransition? {y:0}:{y:0}}>
 
    <Container
+      component='header'
       className={style.opening}
       maxWidth='xxl'
       sx={{
@@ -70,6 +71,6 @@ return (
          Gallery
       </Typography>
    </Container>
-   </motion.div > 
+   </motion.section > 
    )     
 }

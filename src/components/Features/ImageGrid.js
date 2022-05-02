@@ -1,9 +1,18 @@
 import { useTheme } from '@emotion/react'
 import { ImageList, ImageListItem, Skeleton, useMediaQuery } from '@mui/material'
+import { makeStyles } from '@mui/styles'
 import React, { useEffect, useState } from 'react'
+import HoverBox from './HoverBox'
 
-export default function ImageGrid({rawData}) {
+const useStyles = makeStyles({
+   imageContainer: {
+      position:'relative',
+   },
+})
+
+export default function ImageGrid({unsplash, rawData}) {
    const theme = useTheme()
+   const style = useStyles()
    const large = useMediaQuery(theme.breakpoints.up('lg'))
    const [imgSkeleton, setImgSkeleton] = useState(true)
 
@@ -25,14 +34,20 @@ export default function ImageGrid({rawData}) {
    gap={2}
    >
       {rawData.map(i=> 
-         <ImageListItem key={i.id}>
+         <ImageListItem 
+         className={style.imageContainer}
+         key={i.id}>
+
+            <HoverBox unsplash={unsplash} data={i} />
+
             {imgSkeleton?
             <Skeleton animation="wave" variant='rectangular' width='100%' sx={{minHeight:'25rem'}}/> 
             :
                <img
                src={`${i.urls.regular}?w=164&h=104&fit=crop&auto=format`}
                srcSet={`${i.urls.regular}?w=164&h=164&fit=crop&auto=format&dpr=2 1x`}
-               alt={i.user.name}
+               style={{pointerEvents:'none'}}
+               alt={i.alt_description}
                loading="lazy"
                /> 
             }

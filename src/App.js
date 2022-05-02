@@ -7,6 +7,8 @@ import Gallery from "./components/Pages/Gallery";
 import Search from "./components/Pages/Search";
 import Opening from "./components/Pages/Opening";
 import { createTheme, ThemeProvider } from '@mui/material'
+import ImageDetails from "./components/Pages/ImageDetails";
+import { createApi } from "unsplash-js";
 
 const theme = createTheme({
   palette: {
@@ -19,6 +21,9 @@ const theme = createTheme({
   },
 
 })
+const unsplash = createApi({
+  accessKey: "fUccPr_-dHJ0hIkUciO_v7VI77hylduIqGM6mpqxGMU",
+});
 
 function App() {
   const [nav, setNav] = useState(false)
@@ -58,7 +63,8 @@ function App() {
           <Route path="/" element={<Navbar nav={nav} setNav={setNav} />}>
             <Route index element={<Opening/>}/>
             <Route path="gallery" element={<Gallery setShuffle={setShuffle} rawData={rawData} />}/>
-            <Route path="search" element={<Search />} />
+            <Route path="search" element={<Search unsplash={unsplash} />} />
+            <Route path="/image_details/:id" element={<ImageDetails unsplash={unsplash}/>}/>
           </Route>
         </Routes>
       </BrowserRouter>

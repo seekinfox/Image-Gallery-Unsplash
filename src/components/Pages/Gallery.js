@@ -3,7 +3,6 @@ import { Container, ImageList, ImageListItem, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import { makeStyles } from '@mui/styles'
 import React, { useEffect, useState } from 'react'
-import { useMediaQuery } from '@mui/material'
 import {MdSignalWifiConnectedNoInternet4} from 'react-icons/md'
 import NavToolbar from '../Features/NavToolbar'
 import ImageGrid from '../Features/ImageGrid'
@@ -30,7 +29,7 @@ const useStyle = makeStyles(theme => ({
 export default function Gallery({setShuffle, rawData}) {
    const theme = useTheme()
    const style = useStyle(theme)
-   console.log('raw', rawData)
+   // console.log('raw', rawData)
    const [pageTransition, setPageTransition] = useState(true)
 
 
@@ -46,7 +45,7 @@ export default function Gallery({setShuffle, rawData}) {
 
    return (
    <motion.div
-   initial={{y:'30vh'}}
+   initial={{y:'10vh'}}
    animate={pageTransition? {y:0}:{y:0}}>
     <Box 
     className={style.imageGridBox}

@@ -25,7 +25,6 @@ const useStyle = makeStyles(theme => ({
          height: '4rem',
          flexDirection: 'row',
          justifyContent: 'space-evenly',
-         
       },
      
       [theme.breakpoints.up('md')]: {
@@ -85,6 +84,7 @@ export default function Navbar({nav, setNav}) {
          icon: <BsSearch className={style.buttonIcon}/>,
          title: 'Search'
       },
+      
    ];
 
   return (
@@ -94,7 +94,7 @@ export default function Navbar({nav, setNav}) {
       className={style.nav}
       component="nav"
       color='secondary.main'
-      zIndex='appBar'
+      zIndex={2000}
       >
       {linksData.map(({id, path, icon, title}) => 
          <Link

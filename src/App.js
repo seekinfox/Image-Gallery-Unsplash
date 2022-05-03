@@ -9,6 +9,7 @@ import Opening from "./components/Pages/Opening";
 import { createTheme, ThemeProvider } from '@mui/material'
 import ImageDetails from "./components/Pages/ImageDetails";
 import { createApi } from "unsplash-js";
+import Collection from "./components/Features/Collection";
 
 const theme = createTheme({
   palette: {
@@ -65,6 +66,7 @@ function App() {
             <Route path="gallery" element={<Gallery setShuffle={setShuffle} rawData={rawData} />}/>
             <Route path="search" element={<Search unsplash={unsplash} />} />
             <Route path="/image_details/:id" element={<ImageDetails unsplash={unsplash}/>}/>
+            <Route path="collection/:id" element={<Collection/>} />
           </Route>
         </Routes>
       </BrowserRouter>

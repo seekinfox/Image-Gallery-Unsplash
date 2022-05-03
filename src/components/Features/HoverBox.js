@@ -57,7 +57,7 @@ export default function HoverBox({unsplash, data}) {
   return (
 
    <Link to={`/image_details/${data.id}`}>
-      <Box onClick={(e) => e.stopPropagation()} className={style.imageInnerContainer}>
+      <Box className={style.imageInnerContainer}>
          <Stack 
          direction='row' 
          alignItems='center' 

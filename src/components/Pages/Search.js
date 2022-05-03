@@ -5,7 +5,7 @@ import { useTheme } from '@emotion/react'
 import { makeStyles } from '@mui/styles'
 import imgbg from "../../Assets/abstract-timekeeper.svg"
 import { Button, Container, InputBase, Pagination, Paper, Stack, Typography } from '@mui/material'
-//import imgbg1 from '../../Assets/flat-mountains.svg'
+import imgbg1 from '../../Assets/flat-mountains.svg'
 import {BsSearch} from "react-icons/bs"
 import { createApi } from 'unsplash-js';
 import ImageGrid from '../Features/ImageGrid'
@@ -24,12 +24,12 @@ const useStyle = makeStyles(theme => ({
    },
    inputBox : {
       width: '100%',
-      height:'25rem',
-      background:`url(${imgbg}) no-repeat`,
+      background:`url(${imgbg1}) no-repeat`,
       backgroundSize:'cover',
       display: 'flex',
       justifyContent:'center',
       alignItems:'center',
+      transition:'.3s ease',
 
       [theme.breakpoints.up('xs')]: {
          backgroundPositionX: '50%',
@@ -132,10 +132,11 @@ export default function Search({unsplash}) {
 
    
   return (
+   <>
+   <NavToolbar page='search'/>
    <motion.div
    initial={{y:'30vh'}}
    animate={pageTransition? {y:0}:{y:0}}>
-
    <Box
    component='section'
    sx={{
@@ -143,8 +144,9 @@ export default function Search({unsplash}) {
       minHeight:'100vh'
      }}
    >
-      <NavToolbar page='search' />
-      <Box className={style.inputBox}>
+      <Box 
+      sx={{height: searchValue === '' ? '100vh': '15rem'}}
+      className={style.inputBox}>
         <Paper onSubmit={(e) => handleSubmit(e)} component='form' sx={{pl:'1rem', display: 'flex', alignItems: 'center', width: 400}} >
          <InputBase 
          autoFocus 
@@ -186,11 +188,13 @@ export default function Search({unsplash}) {
       justifyContent:'center',
       alignItems:'center',
      }} 
-     className={style.imageGridBox}>
+     pt={2}
+     className={style.imageGridBox}
+     >
       {searchData !== null && searchData.length !== 0 ?
 
         (dataLoading ? 
-         <Box ax={{border:'10px solid red'}}  className={style.gifBox}>
+         <Box className={style.gifBox}>
             <img width='100%' src={camera} alt='' />
          </Box>
            :
@@ -229,5 +233,6 @@ export default function Search({unsplash}) {
       }
    </Box>
    </motion.div>
+   </>
   )
 }

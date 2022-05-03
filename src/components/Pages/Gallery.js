@@ -11,12 +11,13 @@ import { motion } from 'framer-motion'
 const useStyle = makeStyles(theme => ({
 
    imageGridBox: {
+      position: 'relative',
       [theme.breakpoints.up('xs')]: {
-         padding: '1rem 0 4rem', 
+         padding: '4rem 0 4rem', 
       },
 
       [theme.breakpoints.up('sm')]: {
-         padding: '1rem 1rem 2rem 5rem', 
+         padding: '5rem 1rem 2rem 5rem', 
       }
    },
 
@@ -44,14 +45,14 @@ export default function Gallery({setShuffle, rawData}) {
     }, [])
 
    return (
+      <>
+   <NavToolbar page='gallery' setShuffle={setShuffle}/>
    <motion.div
    initial={{y:'10vh'}}
    animate={pageTransition? {y:0}:{y:0}}>
-    <Box 
+   <Box 
     className={style.imageGridBox}
     >
-      <NavToolbar page='gallery' setShuffle={setShuffle}/>
-
       {rawData !== null ? 
          <ImageGrid rawData={rawData} />
       :
@@ -73,5 +74,6 @@ export default function Gallery({setShuffle, rawData}) {
       }
     </Box>
    </motion.div>
+   </>
   )
 }

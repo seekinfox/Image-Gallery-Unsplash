@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Typography } from '@mui/material'
-import img from '../../Assets/cornered-stairs.svg'
+import { Button, Container, Stack, Typography } from '@mui/material'
+import img from '../../Assets/bg.webp'
 import { makeStyles } from '@mui/styles'
 import { useTheme } from '@emotion/react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
+import NavToolbar from '../Features/NavToolbar'
+import { Box } from '@mui/system'
 
 const useStyle = makeStyles(theme => ({
    opening: {
-      background: `url(${img}) no-repeat`,
-      backgroundSize: 'cover',
-      
+      background: `linear-gradient(180deg, rgba(0,0,0,.8) ,rgba(0,0,0,.5) 0%, rgba(0,0,0,.8)), url(${img})`,
+      backgroundSize:'cover',
       [theme.breakpoints.down('sm')]: {
          backgroundPositionY: '-.9rem'
       },
@@ -41,6 +43,8 @@ export default function Opening() {
    
 
 return (
+   <>
+   <NavToolbar page="" />
    <motion.section
    initial={{y:'30vh'}}
    animate={pageTransition? {y:0}:{y:0}}>
@@ -52,25 +56,35 @@ return (
       sx={{
          justifyContent:'center',
          display:'flex',
-         height:"100vh", 
+         minHeight:'40rem',
          alignItems: 'center'
       }}
-   >
+   > 
+   <Stack alignItems={'center'}>
+      <Box mb={2}>
       <Typography
-         variant='h1'
+         variant='h5'
          component='h1'
          letterSpacing='.5rem'
          fontWeight='900' 
-         fontSize={{
-            xs:'3rem',
-            md: '3.5rem',
-            lg: '4.5rem'
-         }}
          className={style.typo}
       >
-         Gallery
+         Photo Gallery
       </Typography>
-   </Container>
+      <Typography
+         variant='subtitle1'
+         letterSpacing='.5rem'
+         fontWeight='900' 
+         className={style.typo}
+      >
+      </Typography>
+      </Box>
+      <Box>
+         <Button color='secondary' variant='outlined'>Create Your Collection</Button>
+      </Box>
+   </Stack>
+   </Container>   
    </motion.section > 
+   </>
    )     
 }

@@ -7,7 +7,6 @@ import { makeStyles } from '@mui/styles'
 const useStyle = makeStyles(theme => ({
    innerBox: {
       color:'black',
-
       '&:nth-of-type(1)':{
          fontSize:'2rem',
 
@@ -29,11 +28,13 @@ export default function NavToolbar({page,setShuffle}) {
 
   return (
    <AppBar 
-   component='div'
-   sx={{
-      zIndex:900, 
+      zIndex={0}
+      position="fixed"
+      sx={{
+      top:0,
+      bottom: 'auto',
       boxShadow:0, 
-      background:'linear-gradient(90deg, rgba(255,255,255,0) 30%, rgba(0,0,0,1) 10%)'
+      background:'linear-gradient(90deg, rgba(0,0,0,.5), rgba(0,0,0,.9), rgba(0,0,0,1))',
    }}>
          <Toolbar variant="regular">
             <Stack 
@@ -41,7 +42,7 @@ export default function NavToolbar({page,setShuffle}) {
             direction='row'
             justifyContent='space-between'
             alignItems='center'>
-               <Box className={style.innerBox}>
+               <Box sx={{filter:'invert(100%)'}} className={style.innerBox}>
                   <BsImageAlt/>
                </Box>
                <Box className={style.innerBox}>
@@ -49,7 +50,7 @@ export default function NavToolbar({page,setShuffle}) {
                      <Button 
                      onClick={() => setShuffle(prev => !prev)}
                      sx={{
-                        borderRadius:0, letterSpacing:'.1rem'}} variant='contained' 
+                        borderRadius:0, letterSpacing:'.1rem'}} variant='outlined' 
                      color='secondary'
                      >shuffle
                      </Button>

@@ -1,4 +1,4 @@
-import { Box, Container, Grid, IconButton, Stack, Typography } from '@mui/material'
+import { Box, Grid, IconButton, Stack, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
@@ -33,8 +33,7 @@ const useStyle = makeStyles(theme => ({
       display:'flex',
       overflow:'hidden',
       position:'relative',
-      minHeight: '40rem',
-      maxHeight:'60rem',
+      
       justifyContent:'center'
    },
    img : {
@@ -66,7 +65,6 @@ export default function ImageDetails({unsplash}) {
        cam: {t: '', d: ''},
        focal: {t: '', d: ''},
        apar: {t: '', d: ''},
-
    })
    
    const  { id } = useParams()
@@ -108,9 +106,9 @@ export default function ImageDetails({unsplash}) {
 
 
    return (
-   <motion.div
-      initial={{y:'30vh'}}
-      animate={pageTransition? {y:0}:{y:0}}>
+   <motion.section
+      initial={{x:'100vw'}}
+      animate={pageTransition? {x:0}:{x:0}}>
       <Box 
       sx={{
       width:'100%',
@@ -220,6 +218,6 @@ export default function ImageDetails({unsplash}) {
          </Stack>
       }
       </Box>
-   </motion.div>
+   </motion.section>
   )
 }
